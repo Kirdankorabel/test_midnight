@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0fdd95710897c4cb8afb989582a713, type: 3}
+  m_Name: LootDataContainer
+  m_EditorClassIdentifier: 
+  _data:
+  - _itemId: Plant0
+    _chance: 0
+  - _itemId: Plant1
+    _chance: 0
+  - _itemId: Plant2
+    _chance: 0
+  - _itemId: Plant3
+    _chance: 0
+  - _itemId: Plant4
+    _chance: 0
+  - _itemId: Plant5
+    _chance: 0
+  - _itemId: Plant6
+    _chance: 0
+  - _itemId: Plant7
+    _chance: 0
+  - _itemId: Plant8
+    _chance: 0

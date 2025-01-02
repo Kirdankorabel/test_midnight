@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "key": "menu.play",
+      "value": "Play"
+    },
+    {
+      "key": "menu.options",
+      "value": "Options"
+    },
+    {
+      "key": "menu.exit",
+      "value": "Exit"
+    },
+    {
+      "key": "game.openWorkshop",
+      "value": ""
+    }
+  ]
+}

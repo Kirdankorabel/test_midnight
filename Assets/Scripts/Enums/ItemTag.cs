@@ -1,0 +1,19 @@
+public enum ItemTag
+{
+    None,
+    Magical,
+    Ordinary,
+    Sublime,
+    Complex,
+    Simple,
+    Living,
+    Dead,
+    Soluble,
+    Crushable,
+    Flammable,
+    Catalyst,
+    Catalyzed,
+    DissolvedIWater,
+    DissolvedInOil,
+    DissolvedInAlcohol
+}

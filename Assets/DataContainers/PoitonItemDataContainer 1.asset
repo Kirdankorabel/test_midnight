@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165eee1fba1434b439fa04552cb3b511, type: 3}
+  m_Name: PoitonItemDataContainer 1
+  m_EditorClassIdentifier: 
+  _data:
+  - _itemId: Potion0
+    defaultPrise: 10
+    sprite: {fileID: 21300000, guid: b00d8405648b7ae4f9c3b833fdc29905, type: 3}
+    type: 0
+    tags: 
+  - _itemId: Potion1
+    defaultPrise: 20
+    sprite: {fileID: 21300000, guid: 3886d738fb4622444aa18f5835928976, type: 3}
+    type: 0
+    tags: 
+  - _itemId: Potion2
+    defaultPrise: 20
+    sprite: {fileID: 21300000, guid: 75da6ef44887bfb48b5cef6e03dc9beb, type: 3}
+    type: 0
+    tags: 
+  - _itemId: Potion3
+    defaultPrise: 20
+    sprite: {fileID: 21300000, guid: c2ed98c9a356c6344aa082fb27afd361, type: 3}
+    type: 0
+    tags: 
+  - _itemId: Potion4
+    defaultPrise: 20
+    sprite: {fileID: 21300000, guid: 3725c1e063649bf4f904365d5b452924, type: 3}
+    type: 0
+    tags: 
+  - _itemId: Potion5
+    defaultPrise: 20
+    sprite: {fileID: 21300000, guid: 07a5d6a9f659d8840b05d136bcbc6cf5, type: 3}
+    type: 0
+    tags: 

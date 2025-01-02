@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb96a33e2557d12489253f06d4b095df, type: 3}
+  m_Name: RoomDataContainer
+  m_EditorClassIdentifier: 
+  _data:
+  - _itemId: workshop0
+    _prise: 0
+    _type: 0
+    _isOpen: 1
+    _positionCount: 5
+  - _itemId: store0
+    _prise: 0
+    _type: 1
+    _isOpen: 1
+    _positionCount: 5
+  - _itemId: workshop1
+    _prise: 700
+    _type: 0
+    _isOpen: 0
+    _positionCount: 5
+  - _itemId: store1
+    _prise: 500
+    _type: 1
+    _isOpen: 0
+    _positionCount: 5
