@@ -1,3 +1,4 @@
+using Core;
 using UnityEngine;
 
 namespace Controller.Characters
@@ -27,7 +28,7 @@ namespace Controller.Characters
                 var routePoint = GameContext.DIContainer.Resolve<RouteController>().GetRoute(pointTag).GetPoint();
                 if (routePoint == null)
                 {
-                    Debug.LogError($"{pointTag} - rout not founded");
+                    GameLog.AddMassage($"{pointTag} - rout not founded");
                     Break();
                     return;
                 }
@@ -38,7 +39,7 @@ namespace Controller.Characters
                 var  routePoint = GameContext.DIContainer.Resolve<RouteController>().GetRoute(buildingId, pointTag).GetPoint();
                 if (routePoint == null)
                 {
-                    Debug.LogError($"{pointTag} - rout not founded");
+                    GameLog.AddMassage($"{pointTag} - rout not founded");
                     Break();
                     return;
                 }

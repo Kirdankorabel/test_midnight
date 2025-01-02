@@ -22,7 +22,7 @@ namespace Controller
         public void InitializeNew()
         {
             SetItemCollection(new ItemCollectionModel("plyer inventory", 100));
-            Debug.LogError("динамически расширять");
+           //TODO динамически расширять
         }
 
         public void SetLoaded(ItemCollectionModel itemCollectionModel)
