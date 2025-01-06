@@ -21,8 +21,7 @@ namespace Controller
 
         public void InitializeNew()
         {
-            SetItemCollection(new ItemCollectionModel("plyer inventory", 100));
-           //TODO динамически расширять
+            SetItemCollection(new ItemCollectionModel("Storage", 100));
         }
 
         public void SetLoaded(ItemCollectionModel itemCollectionModel)
@@ -72,7 +71,11 @@ namespace Controller
         public override void ReleseItem(ItemModel item)
         {
             var position = _itemCollectionModel.Items.IndexOf(item);
-            _itemCollectionModel.ReleseItem(item);
+            if (position < 0)
+            {
+                return;
+            }
+            _itemCollectionModel.SetItemToPosition(ItemModel.NullItem, position);
         }
 
         public override ItemModel GetItem(int i)
@@ -132,7 +135,7 @@ namespace Controller
 
         private void OnItemRemovedHeandler(int cell)
         {
-            _inventoryView.ItemRemoveHeandler(cell);
+            _inventoryView.ReleaseItem(cell);
         }
 
         public override void AddItem(ItemModel item)

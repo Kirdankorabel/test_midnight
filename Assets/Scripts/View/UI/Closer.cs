@@ -25,5 +25,10 @@ namespace View.UI
         {
             _closeableObjects.Enqueue(closeable);
         }
+
+        private void OnEnable()
+        {
+            _closeableObjects.Clear();
+        }
     }
 }

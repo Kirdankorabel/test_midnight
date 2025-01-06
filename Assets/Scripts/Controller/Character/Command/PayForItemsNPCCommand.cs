@@ -4,8 +4,11 @@ namespace Controller.Characters
     {
         public override void StartAction()
         {
-            GameContext.DIContainer.Resolve<AccountController>().AddMoneyFoItems(_characterController.ItemCollectionController.ItemCollectionModel.Items);
-            EndAction();
+            GameContext.DIContainer.Resolve<AccountController>()
+                .AddMoneyFoItems(_characterController.ItemCollectionController.ItemCollectionModel.Items);
+
+            var time = _characterController.AnimationController.PlayTalkingAnimation();
+            _characterController.CharacterMover.WaitTime(time, EndAction);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace View.UI
             _gameLibrary = GameContext.DIContainer.Resolve<GameLibrary>();
             _inventoryController = GameContext.DIContainer.Resolve<InventoryController>();
             _wworkController = GameContext.DIContainer.Resolve<WorkController>();
-            for (var i = 0; i < recipe.Components.Count; i++)
+            for (var i = 0; i < _components.Count; i++)
             {
                 if (i < recipe.Components.Count)
                 {

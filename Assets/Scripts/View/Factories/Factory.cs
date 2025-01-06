@@ -32,7 +32,8 @@ namespace View
         {
             _pool.Release(dObject);
         }
-        protected virtual void OnApplicationQuit()
+
+        private void OnDestroy()
         {
             _pool.Dispose();
         }

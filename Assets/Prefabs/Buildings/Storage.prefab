@@ -82,7 +82,6 @@ MonoBehaviour:
     _routeName: Storage
     _parentId: 
   _isBuilding: 1
-  _autoregistration: 0
 --- !u!114 &-6690061218066274705
 MonoBehaviour:
   m_ObjectHideFlags: 0

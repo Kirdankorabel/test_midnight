@@ -50,7 +50,14 @@ namespace View.UI
         public void DestroyTaskView()
         {
             OnRightClick = null;
-            Destroy(this.gameObject);
+            try
+            {
+                Destroy(this.gameObject);
+            }
+            catch 
+            { 
+                //TODO найти где он дестроится
+            }
         }
 
         public void OnPointerClick(PointerEventData eventData)

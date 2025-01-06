@@ -3,7 +3,6 @@ using Model;
 using System.Collections.Generic;
 using UnityEngine;
 using View;
-using static Unity.VisualScripting.Antlr3.Runtime.Tree.TreeWizard;
 
 namespace Controller.Characters
 {
@@ -44,8 +43,9 @@ namespace Controller.Characters
 
         private void OnHourChandedHeandler(int hour)
         {
-            if(!_workshopController.WorkshopIsOpen || _timeManager.Hour % 2 != 0 || _timeManager.Hour < 8 
-               || _timeManager.Hour > 20 || _visitorModels.Count >= _workshopController.GetMaxVisitorsCount())
+            if (!_workshopController.WorkshopIsOpen
+                || _timeManager.Hour % 2 != 0 || _timeManager.Hour < 8
+                || _timeManager.Hour > 20 || _visitorModels.Count >= _workshopController.GetMaxVisitorsCount())
             {
                 return;
             }
@@ -54,29 +54,18 @@ namespace Controller.Characters
 
         private void CreateVisitor()
         {
-            var character = _characterFactory.GetCharacter(CharacterType.visitor);
-            var strategy = new VisitorStrategy();
             var characterModel = new CharacterModel("visitor", CharacterType.visitor, new Model.Items.ItemCollectionModel("visitor", 20));
-            var characterController = new NPCConroller(characterModel).SetStrategy(strategy);
-            strategy.SetController(characterController);
-            character.Initialize(characterController, _characterFactory.StartPoint, "111");
-            _visitorModels.Add(characterModel);
-            characterModel.OnDestroyed += CharacterDestoryedHeandler;
-            _visitors.Add(characterController);
+            var characterController = CreateView(characterModel, _characterFactory.StartPoint);
+
+            characterController.CharacterStrategy.InitializeStartCommands();
+            characterController.Move();
         }
 
         private void CreateVisitor(CharacterModel characterModel)
         {
-            var character = _characterFactory.GetCharacter(CharacterType.visitor);
-            var strategy = new VisitorStrategy(); 
-            var characterController = new NPCConroller(characterModel).SetStrategy(strategy);
-            strategy.SetController(characterController);
-            character.Initialize(characterController, _characterFactory.StartPoint, "111");
-            character.transform.position = characterModel.Position;
-            character.transform.eulerAngles = characterModel.Rotation;
-            _visitorModels.Add(characterModel);
-            characterModel.OnDestroyed += CharacterDestoryedHeandler;
-            _visitors.Add(characterController);
+            var characterController = CreateView(characterModel, characterModel.Position);
+            characterController.CharacterMover.transform.eulerAngles = characterModel.Rotation;
+
             characterController.InitializeLoaded();
         }
 
@@ -85,6 +74,21 @@ namespace Controller.Characters
             _visitorModels.Remove(characterModel);
             _visitors.RemoveAll(v => v.Model == characterModel);
             characterModel.OnDestroyed -= CharacterDestoryedHeandler;
+        }
+
+
+        private NPCConroller CreateView(CharacterModel characterModel, Vector3 psoition)
+        {
+            var character = _characterFactory.GetCharacter(CharacterType.visitor, psoition);
+            var strategy = new VisitorStrategy();
+            var characterController = new NPCConroller(characterModel).SetStrategy(strategy).SetView(character);
+            strategy.SetController(characterController);
+            _visitorModels.Add(characterModel);
+            characterModel.OnDestroyed += CharacterDestoryedHeandler;
+            _visitors.Add(characterController);
+            character.OnRealesed += (value) => _visitors.Remove(characterController);
+
+            return characterController;
         }
     }
 }

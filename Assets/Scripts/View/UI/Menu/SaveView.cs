@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using View.UI;
+using DI;
 
 namespace View.UI
 {

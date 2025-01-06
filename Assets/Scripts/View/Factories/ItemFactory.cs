@@ -11,7 +11,6 @@ namespace View
         {
             base.Construct();
             _library = GameContext.DIContainer.Resolve<GameLibrary>();
-            DraggebleObject.OnRealesed += ReleaseItem;
         }
 
         public DraggebleObject GetItem(string name)
@@ -19,6 +18,7 @@ namespace View
             var result = base.GetItem();
             result.Item = new ItemModel(_library.GetItem(name));
             result.SetSprite(result.Item.Data.Sprite);
+            result.OnRealesed += ReleaseItem;
             return result;
         }
 
@@ -28,11 +28,6 @@ namespace View
             result.Item = new ItemModel(itemData);
             result.SetSprite(result.Item.Data.Sprite);
             return result;
-        }
-
-        protected override void OnApplicationQuit()
-        {
-            DraggebleObject.OnRealesed -= ReleaseItem;
         }
     }
 }

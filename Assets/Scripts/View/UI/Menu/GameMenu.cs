@@ -1,6 +1,8 @@
 using SaveManagment;
 using UnityEngine;
+using DI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace View.UI
 {
@@ -30,6 +32,7 @@ namespace View.UI
             _quitButton.onClick.AddListener(Application.Quit);
             _saveButton.onClick.AddListener(OpenSavePanel);
             _loadButton.onClick.AddListener(OpenLoadPanel);
+            _mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene(_startSceneName));
         }
 
         private void Open()

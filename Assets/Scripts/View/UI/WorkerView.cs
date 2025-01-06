@@ -37,7 +37,7 @@ namespace View.UI
                 _fillImage.fillAmount = (float)(workerModel.Exp / _workerDataContainer.ExpForLevel[workerModel.Level]);
                 _updateWorkerButton.interactable = 
                     _accountController.Balance > _workerDataContainer.PriceFoLevel[workerModel.Level]
-                    && workerModel.Level > _workerDataContainer.ExpForLevel[workerModel.Level];
+                    && workerModel.Exp > _workerDataContainer.ExpForLevel[workerModel.Level];
                 _expText.text = $"{workerModel.Exp} / {_workerDataContainer.ExpForLevel[workerModel.Level]}";
             }
             else

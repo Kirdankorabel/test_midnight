@@ -7,11 +7,13 @@ namespace Controller.Characters
 {
     public class NPCConroller
     {
+        private CharacterView _character;
         private CharacterMover _characterMover;
         private NPCCommand _lastCommand;
         private ItemCollectionController _itemCollectionController;
         private CharacterModel _characterModel;
         private CharacterStrategy _characterStrategy;
+        private CharacterAnimationController _animationController;
 
         public event System.Action OnStarted;
         public event System.Action OnAllCommandEnded;
@@ -23,23 +25,23 @@ namespace Controller.Characters
         public CharacterModel Model => _characterModel;
         public ItemCollectionController ItemCollectionController => _itemCollectionController;
         public CharacterStrategy CharacterStrategy => _characterStrategy;
+        public CharacterAnimationController AnimationController => _animationController;
 
         public NPCConroller(CharacterModel characterModel)
         {
             _characterModel = characterModel;
+            _itemCollectionController = new ItemCollectionController(characterModel.ItemCollectionModel);
         }
 
-        public NPCConroller SetMover(CharacterMover characterMover)
+        public NPCConroller SetView(CharacterView character)
         {
-            _characterMover = characterMover;
+            _characterMover = character.Mover;
+            _characterMover.Construct();
+            _character = character;
+            _animationController = new CharacterAnimationController(character.Animator);
             return this;
         }
 
-        public NPCConroller SetItemCollection(ItemCollectionController itemCollectionController)
-        {
-            _itemCollectionController = itemCollectionController;
-            return this;
-        }
         public NPCConroller SetStrategy(CharacterStrategy strategy)
         {
             _characterStrategy = strategy;

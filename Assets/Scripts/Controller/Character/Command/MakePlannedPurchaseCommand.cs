@@ -1,37 +1,37 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Controller.Characters
 {
     public class MakePlannedPurchaseCommand : NPCCommand
     {
         private List<string> _targetItemIds;
-        private string _routePoint;
 
         public MakePlannedPurchaseCommand(string routePoint, List<string> targetItemIds)
         {
-            _routePoint = routePoint;
             _targetItemIds = targetItemIds;
         }
 
         public override void StartAction()
         {
-            var i = 0;
             var inventory = GameContext.DIContainer.Resolve<InventoryController>();
-            _targetItemIds.ForEach(item =>
+            var removedItems = new List<string>();
+            for(var i = 0; i < _targetItemIds.Count; i++)
             {
-                var targetItem = inventory.GetItem(item);
+                var targetItem = inventory.GetItem(_targetItemIds[i]);
                 if(!targetItem.IsNullItem || !targetItem.IsFreeItem)
                 {
-                    _targetItemIds.Remove(item); 
+                    removedItems.Add(_targetItemIds[i]); 
                 }
                 else
                 {
                     inventory.ReleseItem(targetItem);
                     _characterController.ItemCollectionController.ItemCollectionModel.Items.Add(targetItem);
                 }
-            });
-            _characterController.CharacterMover.WaitToTime(0.1f, EndAction);
-            EndAction();
+            }
+            removedItems.ForEach(item => _targetItemIds.Remove(item));
+            var time = _characterController.AnimationController.PlayLookindAnimation();
+            _characterController.CharacterMover.WaitTime(time, EndAction);
         }
     }
 }

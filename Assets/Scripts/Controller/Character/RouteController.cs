@@ -10,16 +10,16 @@ namespace Controller.Characters
     {
         private Dictionary<(string, string), Route> routes = new Dictionary<(string, string), Route>();
 
-        public void AddPoint(string buildingId, RoutePointData point, UseablePlaceableObjectController controller = null)
+        public void AddPoint(string pointId, RoutePointData point, UseablePlaceableObjectController controller = null)
         {
-            if (routes.ContainsKey((buildingId,point.RouteName)))
+            if (routes.ContainsKey((pointId, point.RouteName)))
             {
-                routes[(buildingId, point.RouteName)].AddPoint(new RoutePoint(point.Transform.position, controller));
+                routes[(pointId, point.RouteName)].AddPoint(new RoutePoint(point.Transform.position, pointId, controller));
             }
             else
             {
-                routes.Add((buildingId, point.RouteName), new Route(point.RouteName));
-                routes[(buildingId, point.RouteName)].AddPoint(new RoutePoint(point.Transform.position, controller));
+                routes.Add((pointId, point.RouteName), new Route(point.RouteName));
+                routes[(pointId, point.RouteName)].AddPoint(new RoutePoint(point.Transform.position, pointId, controller));
             }
         }
 
@@ -86,7 +86,10 @@ namespace Controller.Characters
             RoutePoint result = _points[0];
             for (var i = 1; i < _points.Count; i++)
             {
-                result = _points[i].QueueSize < result.QueueSize ? _points[i] : result;
+                if (_points[i].IsFree)
+                {
+                    result = _points[i].QueueSize < result.QueueSize ? _points[i] : result;
+                }
             }
             return result;
         }

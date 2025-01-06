@@ -38,7 +38,19 @@ namespace Controller.Characters
             }
             else
             {
-                Wait();
+                var waitingPoint = _routeController.GetRoute(RouteTags.waitingPlace).GetPoint();
+
+                if (waitingPoint != null)
+                {
+                    _characterController
+                        .AddCommand(new CommandModel(CommandType.move).SetPointTag(RouteTags.waitingPlace));
+                }
+                else
+                {
+                    _characterController
+                        .AddCommand(new CommandModel(CommandType.waite).SetTime(float.MaxValue));
+                }
+                _characterController.Move();
             }
         }
 
@@ -64,7 +76,7 @@ namespace Controller.Characters
 
         private bool TryToCreateTask()
         {
-            var task = _workController.GetFreeTask(_model.WorkerId);//TODO проходиться по всему
+            var task = _workController.GetFreeTask(_model.WorkerId);
             if(task == null)
             {
                 return false;

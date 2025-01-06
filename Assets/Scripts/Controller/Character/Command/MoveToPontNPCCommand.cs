@@ -5,11 +5,8 @@ namespace Controller.Characters
 {
     public class MoveToPontNPCCommand : NPCCommand
     {
-        [SerializeField] private Vector3 position;
         [SerializeField] private string pointTag;
         [SerializeField] private string buildingId;
-
-        public Vector3 Position => position;
 
         public MoveToPontNPCCommand(string pointTag, string buildingId)
         {
@@ -19,32 +16,35 @@ namespace Controller.Characters
 
         public override void StartAction()
         {
-            if(string.IsNullOrEmpty(pointTag))
+            RoutePoint routePoint;
+            if(string.IsNullOrEmpty(buildingId)) 
             {
-                _characterController.CharacterMover.MoveToPoint(position, EndAction);
-            }
-            else if(string.IsNullOrEmpty(buildingId)) 
-            {
-                var routePoint = GameContext.DIContainer.Resolve<RouteController>().GetRoute(pointTag).GetPoint();
+                routePoint = GameContext.DIContainer.Resolve<RouteController>().GetRoute(pointTag).GetPoint();
                 if (routePoint == null)
                 {
                     GameLog.AddMassage($"{pointTag} - rout not founded");
                     Break();
                     return;
                 }
-                _characterController.CharacterMover.MoveToPoint(routePoint.position, EndAction);
             }
             else
             {
-                var  routePoint = GameContext.DIContainer.Resolve<RouteController>().GetRoute(buildingId, pointTag).GetPoint();
+                routePoint = GameContext.DIContainer.Resolve<RouteController>().GetRoute(buildingId, pointTag).GetPoint();
                 if (routePoint == null)
                 {
                     GameLog.AddMassage($"{pointTag} - rout not founded");
                     Break();
                     return;
                 }
-                _characterController.CharacterMover.MoveToPoint(routePoint.position, EndAction);
             }
+            _characterController.CharacterMover.MoveToPoint(routePoint.position, EndAction);
+            _characterController.AnimationController.PlayMoveAnimation(true);
+        }
+
+        public override void EndAction()
+        {
+            _characterController.AnimationController.PlayMoveAnimation(false);
+            base.EndAction();
         }
     }
 }

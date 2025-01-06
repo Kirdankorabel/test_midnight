@@ -17,6 +17,7 @@ namespace Controller.Characters
         public override void EndAction()
         {
             _action?.Invoke();
+            _characterController.AnimationController.PlayWorkingAnimation(true);
             var building = GameContext.DIContainer.Resolve<WorkshopController>()
                 .GetBuilding(_characterController.Model.BuildingId) 
                 as UseablePlaceableObjectController;

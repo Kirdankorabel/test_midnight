@@ -33,7 +33,12 @@ namespace View.Game.Characters
         public void WaitToTime(float time, Action action)
         {
             _agent.enabled = true;
-            StartCoroutine(WaitCorutine(time, action));
+            StartCoroutine(WaitToTimeCorutine(time, action));
+        }
+        public void WaitTime(float time, Action action)
+        {
+            _agent.enabled = true;
+            StartCoroutine(WaitTimeCorutine(time, action));
         }
 
         public void Destroy()
@@ -74,13 +79,19 @@ namespace View.Game.Characters
             action?.Invoke();
         }
 
-        private IEnumerator WaitCorutine(float time, Action action)
+        private IEnumerator WaitToTimeCorutine(float time, Action action)
         {
             var waitTime = _timeManager.Time + time;
             while (_timeManager.Time < waitTime)
             {
                 yield return null;
             }
+            action?.Invoke();
+        }
+
+        private IEnumerator WaitTimeCorutine(float time, Action action)
+        {
+            yield return new WaitForSeconds(time);
             action?.Invoke();
         }
     }

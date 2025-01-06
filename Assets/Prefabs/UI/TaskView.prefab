@@ -164,11 +164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ab54c0d81ef1a4d96ba0586658f886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 100, y: 100}
+  _size: {x: 0, y: 100}
   _backgroundColors:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.645283, g: 0.645283, b: 0.645283, a: 1}
   - {r: 1, g: 1, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 0}
   _backgroundImage: {fileID: 2125840198271071072}

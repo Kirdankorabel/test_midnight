@@ -44,6 +44,7 @@ namespace Controller
             _inventoryController = GameContext.DIContainer.Resolve<InventoryController>();
             _account = accountModel;
             _account.OnBalanceUpdated += _balanceView.UpdateView;
+            _account.UpdateBalance(0);
         }    
 
         public void ChangeBalance(int value)

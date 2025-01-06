@@ -6,16 +6,14 @@ namespace View
 {
     public class CharacterFactory : MonoBehaviour
     {
-        [SerializeField] private Character _characterPrefab;
         [SerializeField] private Transform _startPoint;
-        [SerializeField] private List<Material> _materials;
+        [SerializeField] private List<CharacterView> _prefabs;
 
         public Vector3 StartPoint => _startPoint.position;
 
-        public Character GetCharacter(CharacterType characterType)
+        public CharacterView GetCharacter(CharacterType characterType, Vector3 psoition)
         {
-            var result = Instantiate(_characterPrefab);
-            result.GetComponent<MeshRenderer>().material = _materials[(int)characterType];
+            var result = Instantiate(_prefabs[(int)characterType], psoition, Quaternion.identity, transform);
             return result;
         }
 

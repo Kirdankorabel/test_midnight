@@ -62,6 +62,11 @@ namespace Model.Items
             return item;
         }
 
+        public void ReleseItem(int position)
+        {
+            SetItemToPosition(ItemModel.NullItem, position);
+        }
+
         public ItemModel GetItem(string itemId)
         {
             var item = items.Find(i => !i.IsNullItem && i.ItemId.Equals(itemId));

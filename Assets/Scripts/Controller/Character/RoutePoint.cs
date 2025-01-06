@@ -8,7 +8,8 @@ namespace Controller.Characters
     public class RoutePoint
     {
         public readonly Vector3 position;
-        public readonly UseablePlaceableObjectController controller;
+        public readonly UseablePlaceableObjectController building;
+        private string _id;
         private bool _isFree = true;
 
         private Queue<Action> _actions = new Queue<Action>();
@@ -27,19 +28,17 @@ namespace Controller.Characters
             }
         }
 
+        public string Id => _id;
+
         public int QueueSize => _actions.Count;
 
-        public UseablePlaceableObjectController PlaceableObjectController => controller;
+        public UseablePlaceableObjectController PlaceableObjectController => building;
 
-        public RoutePoint(Vector3 position)
+        public RoutePoint(Vector3 position, string id,  UseablePlaceableObjectController placeableObjectController)
         {
+            this._id = id;
             this.position = position;
-        }
-
-        public RoutePoint(Vector3 position, UseablePlaceableObjectController placeableObjectController)
-        {
-            this.position = position;
-            controller = placeableObjectController;
+            building = placeableObjectController;
         }
 
         public void AddActionToQueue(Action action)

@@ -10,7 +10,7 @@ namespace SaveManagment
         {
             gameData.name = name;
             string filePath = Path.Combine(Application.persistentDataPath, "Saves/" + name);
-            Debug.LogError(filePath);
+            Debug.Log(filePath);
             if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "Saves")))
             {
                 Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Saves"));
@@ -31,7 +31,7 @@ namespace SaveManagment
                 Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Saves"));
             }
             var info = new DirectoryInfo(Path.Combine(Application.persistentDataPath, "Saves/"));
-            Debug.LogError(Path.Combine(Application.persistentDataPath, "Saves/"));
+            Debug.Log(Path.Combine(Application.persistentDataPath, "Saves/"));
 
             var fileInfo = info.GetFiles();
             foreach (var file in fileInfo)

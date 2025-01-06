@@ -8,7 +8,7 @@ namespace View
 {
     public class DraggebleObject : MonoBehaviour, IPointerDownHandler, IRealesed
     {
-        public static event System.Action<DraggebleObject> OnRealesed;
+        public event System.Action<DraggebleObject> OnRealesed;
         public static event System.Action<DraggebleObject> OnObjectSelected;
 
         [SerializeField] private Image _image;

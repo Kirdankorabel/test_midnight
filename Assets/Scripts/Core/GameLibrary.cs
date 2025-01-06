@@ -4,6 +4,7 @@ using Model;
 using Model.Items;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace View
 {
@@ -97,6 +98,11 @@ namespace View
         public ItemData GetProduct(List<string> components)
         {
             var recipe = RecipeDataContainer.GetRecipe(components);
+            if (recipe == null)
+            {
+                GameLog.AddMassage("recipe not found: " + recipe);
+                return null;
+            }
             return GetItem(recipe.ProductId);
         }
 

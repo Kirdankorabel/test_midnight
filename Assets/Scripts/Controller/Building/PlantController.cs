@@ -33,7 +33,10 @@ namespace Controller.Building
                 }
             }
             var product = _library.GetProduct(components);
-            _inventoryController.TryToSetItem(new ItemModel(product), _componentCellCount);
+            if (product != null)
+            {
+                _inventoryController.TryToSetItem(new ItemModel(product), _componentCellCount);
+            }
         }
     }
 }

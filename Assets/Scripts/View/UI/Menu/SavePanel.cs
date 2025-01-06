@@ -3,6 +3,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DI;
 
 namespace View.UI
 {
@@ -37,7 +38,7 @@ namespace View.UI
         {
             if (_data.Any(data => data.name.Equals(_saveNameInput.text)))
             {
-                _questionPanel.Open("", true);
+                _questionPanel.Open($"A save with the name {_saveNameInput.text} exists. Save anyway?", true);
             }
             else
             {

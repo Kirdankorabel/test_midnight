@@ -1,6 +1,4 @@
-using Controller.Characters;
 using UnityEngine;
-using View.Game.Characters;
 
 namespace Controller.Characters
 {

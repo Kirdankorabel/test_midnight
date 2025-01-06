@@ -23,11 +23,17 @@ namespace Controller.Characters
             if(routePoint.IsFree)
             {
                 routePoint.IsFree = false;
-                _characterController.Model.SetBuilding(routePoint.controller.PlObjectId);
+                if(routePoint.building != null)
+                {
+                    _characterController.Model.SetBuilding(routePoint.building.PlObjectId);
+                }
+                else
+                {
+                    _characterController.Model.SetBuilding(routePoint.Id);
+                }
             }
             else
             {
-                UnityEngine.Debug.LogError($"point {routePoint} is occupy");
                 Break();
             }
             EndAction();

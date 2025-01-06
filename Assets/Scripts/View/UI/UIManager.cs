@@ -1,7 +1,7 @@
-using DI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using DI;
 
 namespace View.UI
 {

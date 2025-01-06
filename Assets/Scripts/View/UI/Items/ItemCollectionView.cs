@@ -47,6 +47,7 @@ namespace View.UI
             for (var i = 0; i < _cells.Count; i++)
             {
                 item = abstractItemCollectionConroller.GetItem(i);
+                _cells[i].ClearCell();
                 if (!item.IsNullItem && !string.IsNullOrEmpty(item.ItemId))
                 {
                     _cells[i].SetItem(_itemFactory.GetItem(item.ItemId));
@@ -94,11 +95,6 @@ namespace View.UI
             }
             var counter = 0;
             _cells.ForEach(cell => InitializeCell(cell, counter++));
-        }
-
-        public void ItemRemoveHeandler(int cellIndex)
-        {
-            _cells[cellIndex].ClearCell();
         }
 
         private void InitializeCell(Cell cell, int cellIndex)

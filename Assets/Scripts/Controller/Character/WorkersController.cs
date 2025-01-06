@@ -1,7 +1,9 @@
 using Controller.Building;
 using Model;
 using System.Collections.Generic;
+using UnityEngine;
 using View;
+using View.Game.Characters;
 using View.UI;
 
 namespace Controller.Characters
@@ -40,6 +42,7 @@ namespace Controller.Characters
         {
             _view = view;
             _view.OnOpened += () => _view.UpdateView(_model.Workers, GameContext.DIContainer.Resolve<WorkshopController>().GetMaxWorkersCount());
+            _view.OnWorkerUpdated += UpdateWorker;
             return this;
         }
 
@@ -74,30 +77,43 @@ namespace Controller.Characters
             return result;
         }
 
+        private void UpdateWorker(int index)
+        {
+            _model.Workers[index].UpdateLevel();//TODO сделать нормально
+            _model.Workers[index].AddExp(-_model.Workers[index].Exp);
+        }
+
         private void OnWorkerAddedHeandler(WorkerModel workerModel)
         {
-            var character = _characterFactory.GetCharacter(CharacterType.worker);
-            var strategy = new WorkerStrategy().SetModel(workerModel);
-            var characterModel = new CharacterModel(workerModel.WorkerId, CharacterType.worker, new Model.Items.ItemCollectionModel(workerModel.WorkerId,20));
-            var characterController = new NPCConroller(characterModel).SetStrategy(strategy);
-            workerModel.SetCharacterModel(characterModel);
-            strategy.SetController(characterController);
-            character.Initialize(characterController, _characterFactory.StartPoint, "111"); 
+            var characterModel = new CharacterModel(workerModel.WorkerId,
+                CharacterType.worker,
+                new Model.Items.ItemCollectionModel(workerModel.WorkerId,20));
+
+            var character = CreateView(workerModel, characterModel, _characterFactory.StartPoint);
             _view.UpdateView(_model.Workers, GameContext.DIContainer.Resolve<WorkshopController>().GetMaxWorkersCount());
-            _characters.Add(characterController);
+            character.CharacterStrategy.InitializeStartCommands();
         }
 
         private void LoadWorker(WorkerModel workerModel)
         {
-            var character = _characterFactory.GetCharacter(CharacterType.worker);
+            var character = CreateView(workerModel, workerModel.CharacterModel, workerModel.CharacterModel.Position);
+            character.CharacterMover.gameObject.transform.eulerAngles = workerModel.CharacterModel.Rotation;
+            character.InitializeLoaded();
+        }
+
+        private NPCConroller CreateView(WorkerModel workerModel, CharacterModel characterModel, Vector3 psoition)
+        {
+            var character = _characterFactory.GetCharacter(CharacterType.worker, psoition);
             var strategy = new WorkerStrategy().SetModel(workerModel);
-            var characterController = new NPCConroller(workerModel.CharacterModel).SetStrategy(strategy);
+            var characterController = new NPCConroller(characterModel)
+                .SetView(character)
+                .SetStrategy(strategy);
+
+            workerModel.SetCharacterModel(characterModel);
             strategy.SetController(characterController);
-            character.Initialize(characterController, workerModel.Position, "111");
-            characterController.InitializeLoaded();
-            character.transform.position = workerModel.Position;
-            character.transform.eulerAngles = workerModel.Rotation;
             _characters.Add(characterController);
+
+            return characterController;
         }
     }
 }

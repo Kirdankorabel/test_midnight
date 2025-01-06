@@ -13,6 +13,7 @@ namespace Controller.Characters
         {
             var routePoint = GameContext.DIContainer.Resolve<RouteController>().
                 GetRoute(_characterController.Model.BuildingId, _routeTag).GetPoint();
+            _characterController.AnimationController.PlayWorkingAnimation(false);
             routePoint.IsFree = true;
             _characterController.Model.SetBuilding(string.Empty);
             EndAction();

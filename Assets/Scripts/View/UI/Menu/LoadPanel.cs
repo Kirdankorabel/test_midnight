@@ -2,6 +2,7 @@ using SaveManagment;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DI;
 
 namespace View.UI
 {

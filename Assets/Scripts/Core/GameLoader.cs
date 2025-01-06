@@ -43,10 +43,10 @@ public class GameLoader : MonoBehaviour
         _savePanel.OnSaved += (saveName) => MyLoader.Save(GetgameData(), saveName);
         _loadPanel.OnGameSelected += LoadGame;
         _workshopController.Construct();
+
         if (Game.GameData != null)
         {
-            var data = MyLoader.Load(_autosavename);
-            SetLoadedGame(data);
+            SetLoadedGame(Game.GameData);
         }
         else
         {
@@ -109,7 +109,7 @@ public class GameLoader : MonoBehaviour
     }
 
     private void LoadGame(GameData gameData)
-    {//TODO без перезагрузки
+    {//TODO сделать без перезагрузки
         Game.GameData = gameData;
         SceneManager.LoadScene("GameScene");
     }

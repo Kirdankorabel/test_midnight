@@ -24,6 +24,8 @@ namespace Model
         public int CommandCount => commandModels.Count;
         public CommandModel LastCommand => lastCommand;
         public string BuildingId => buildingId;
+        public ItemCollectionModel ItemCollectionModel => itemCollectionModel;
+
         public Vector3 Position
         {
             get => position;
